@@ -70,6 +70,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
 
+        <!-- Favicons -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+
     <!-- FAQ Schema Markup -->
     <script type="application/ld+json">
     {
@@ -155,36 +162,38 @@
       ]
     }
     </script>
-    <!-- Organization & Website Schema Markup -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": "https://fairpaycheck.com/#website",
-        "url": "https://fairpaycheck.com/",
-        "name": "Fair Pay Check",
-        "alternateName": "Fair Pay Check Salary Comparison Tool",
-        "publisher": {
-        "@type": "Organization",
-        "name": "Fair Pay Check",
-        "url": "https://fairpaycheck.com/"
-        }
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "FairPayCheck",
+      "description": "Free online salary fairness and underpayment check tool. Compare your pay against market rates by role, experience, skills, and location to see if you are underpaid.",
+      "url": "https://fairpaycheck.com/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
     }
     </script>
     <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "@id": "https://fairpaycheck.com/#organization",
-          "name": "Fair Pay Check",
-          "url": "https://fairpaycheck.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://fairpaycheck.com/static/images/logo.png",
-            "width": 512,
-            "height": 512
-          }
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "FairPayCheck",
+      "alternateName": "FairPayCheck Salary Fairness Tool",
+      "url": "https://fairpaycheck.com/",
+      "publisher": {
+        "@type": "Organization",
+        "name": "FairPayCheck",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fairpaycheck.com/static/images/android-chrome-512x512.png"
         }
+      }
+    }
     </script>
 </head>
 
