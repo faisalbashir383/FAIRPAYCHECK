@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>FairPayCheck – Am I Underpaid? Free Salary Reality Check Tool</title>
+    <meta name="description"
+        content="Am I underpaid? Use FairPayCheck for a free salary comparison and pay fairness check. Compare your salary against market rates by role, experience, and location.">
+    <meta name="keywords"
+        content="am I underpaid, am I being underpaid, underpaid at work, am I paid fairly, underpaid check, underpaid test, salary fairness check, salary comparison, pay fairness, paid less than market, how do I know if I am underpaid, signs you are underpaid">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="FairPayCheck">
+    <link rel="canonical" href="https://fairpaycheck.com/">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FairPayCheck – Am I Underpaid? Free Salary Reality Check Tool">
+    <meta property="og:description"
+        content="Check if you're being paid fairly with our free, anonymous salary assessment tool. Compare your pay to market rates instantly.">
+    <meta property="og:url" content="https://fairpaycheck.com/">
+    <meta property="og:site_name" content="FairPayCheck">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FairPayCheck – Am I Underpaid?">
+    <meta name="twitter:description" content="Free salary fairness assessment. Anonymous. No login required.">
+
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload critical font to prevent layout shift -->
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+    <!-- Load fonts asynchronously to prevent render blocking -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    </noscript>
+
+    <link rel="icon" href="/static/images/favicon-32.png" sizes="32x32">
+    <link rel="icon" href="/static/images/favicon-192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+
+    <!-- Critical CSS inline for first paint -->
+    <style>
+        /* Critical font fallback to prevent layout shift */
+        :root {
+            --font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+        }
+
+        .main {
+            min-height: 100vh;
+        }
+    </style>
+
+    <!-- Main Styles - loaded with high priority -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+
+    <!-- FAQ Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://fairpaycheck.com/"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I know if I am underpaid?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Signs you may be underpaid include earning below market rates for your role and experience, not receiving raises in over two years, new hires earning more than you, and having high-demand skills that are not reflected in your pay. FairPayCheck analyzes these factors to provide a clear salary fairness assessment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the signs of being underpaid?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Common signs of being underpaid include a salary below industry averages, long tenure without promotions, high-demand skills not reflected in compensation, working at a smaller company without market adjustments, and staying in the same role for more than three years without a raise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is FairPayCheck accurate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "FairPayCheck uses market data and industry patterns to generate estimates. While no salary tool can guarantee complete accuracy due to individual circumstances, our scoring system considers multiple factors such as role, experience, skills, company size, and location to provide a reliable indication of pay fairness."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool work for different countries?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. FairPayCheck supports multiple countries including the United States, United Kingdom, Germany, Canada, Australia, and India. Salaries are normalized using country-specific market indices and exchange rates to ensure accurate, localized comparisons."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is FairPayCheck free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. FairPayCheck is completely free to use and does not require registration. All inputs are processed anonymously, and no personal data is stored after the assessment is completed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I trust salary tools online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reputable salary tools use verified market data and transparent methodologies. FairPayCheck explains how scores are calculated and displays confidence levels so users understand the reliability of their results. For important career decisions, it is best to use multiple sources."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do loyal employees earn less?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Studies show that employees who stay at the same company for long periods often earn 10–15% less than those who change jobs. This happens because internal raises frequently do not keep pace with market-rate increases offered to new hires."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I switch jobs if I'm underpaid?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not necessarily. Many people successfully negotiate pay increases by presenting market data to their employer. If internal opportunities are limited and the pay gap is significant, exploring external roles may be an option, but factors beyond salary should also be considered."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should I check my pay fairness?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is recommended to check your salary fairness annually, after promotions, when changing roles, or when relocating. Market rates change frequently, especially in high-demand industries, making regular checks useful for informed negotiations."
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- Organization & Website Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://fairpaycheck.com/#website",
+        "url": "https://fairpaycheck.com/",
+        "name": "Fair Pay Check",
+        "alternateName": "Fair Pay Check Salary Comparison Tool",
+        "publisher": {
+        "@type": "Organization",
+        "name": "Fair Pay Check",
+        "url": "https://fairpaycheck.com/"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://fairpaycheck.com/#organization",
+          "name": "Fair Pay Check",
+          "url": "https://fairpaycheck.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://fairpaycheck.com/static/images/logo.png",
+            "width": 512,
+            "height": 512
+          }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <span class="logo-span">
+                        <img class="logo" width="32" height="32" src="{% static 'images/logo.png' %}" />
+                    </span>
+                    <span class="logo-text">FairPayCheck</span>
+                </a>
+                <div class="header-right">
+                    <p class="tagline">Know your worth. Anonymously.</p>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode"
+                        title="Toggle dark/light mode">
+                        <span class="theme-icon light-icon">🌙</span>
+                        <span class="theme-icon dark-icon">☀️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero" id="hero">
+                <h1>Am I Underpaid? Check Your Pay Fairness with FairPayCheck</h1>
+                <p class="hero-description">
+                    Wondering if you're paid fairly for your work? Use this free, anonymous tool to compare your
+                    salary against market rates. Get instant insights on whether you're underpaid, fairly paid,
+                    or possibly overpaid based on your role, experience, skills, and location.
+                </p>
+                <p class="hero-trust">
+                    <span class="trust-item">🔒 100% Anonymous</span>
+                    <span class="trust-item">⚡ 60-Second Assessment</span>
+                    <span class="trust-item">🌍 6 Countries Supported</span>
+                </p>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="how-it-works" id="how-it-works">
+                <h2>How the Salary Fairness Check Works</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <span class="step-num">1</span>
+                        <h3>Enter Your Details</h3>
+                        <p>Share your job title, country, industry, experience level, and key skills. No login or
+                            personal data required.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-num">2</span>
+                        <h3>We Analyze Your Pay</h3>
+                        <p>Our algorithm compares your compensation against market benchmarks, adjusting for role demand
+                            and regional factors.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-num">3</span>
+                        <h3>Get Your Score</h3>
+                        <p>Receive an instant fairness score (0-100), a fair salary range, and specific reasons
+                            explaining where you stand.</p>
+                    </div>
+                </div>
+                <p class="geo-copy">
+                    Whether you're asking "<strong>am I underpaid in the US</strong>", "<strong>am I underpaid in the
+                        UK</strong>",
+                    or "<strong>am I underpaid in India</strong>", FairPayCheck adjusts results using country-specific
+                    market indices
+                    to give you accurate, localized insights.
+                </p>
+                <br>
+                <a href="#assessment" class="btn btn-primary">Check If You're Underpaid →</a>
+            </section>
+
+            <!-- Form Section -->
+            <section class="form-section" id="assessment">
+                <div class="form-container">
+                    <!-- Progress Indicator -->
+                    <div class="progress-bar">
+                        <div class="progress-step active" data-step="1">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Role & Location</span>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" data-step="2">
+                            <span class="step-number">2</span>
+                            <span class="step-label">Experience</span>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" data-step="3">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Salary Details</span>
+                        </div>
+                    </div>
+
+                    <form id="fairpay-form">
+                        <!-- Step 1: Role & Location -->
+                        <div class="form-step active" data-step="1">
+                            <h2 class="step-title">Tell us about your role</h2>
+
+                            <div class="form-group autocomplete-container">
+                                <label for="job_title">Job Title <span class="required">*</span></label>
+                                <input type="text" id="job_title" name="job_title"
+                                    placeholder="e.g., Software Engineer, Product Manager, Data Analyst" required
+                                    autocomplete="off">
+                                <div class="suggestions-dropdown hidden" id="job-suggestions"></div>
+                                <span class="field-hint">Start typing to see suggestions</span>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="country">Country <span class="required">*</span></label>
+                                    <select id="country" name="country" required>
+                                        <option value="">Select country</option>
+                                        {% for country in countries %}
+                                        <option value="{{ country.value }}">{{ country.label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="city">City <span class="optional">(optional)</span></label>
+                                    <input type="text" id="city" name="city" placeholder="e.g., New York, London">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="industry">Industry <span class="required">*</span></label>
+                                <select id="industry" name="industry" required>
+                                    <option value="">Select industry</option>
+                                    {% for ind in industries %}
+                                    <option value="{{ ind.value }}">{{ ind.label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-primary btn-next" data-next="2">
+                                    Continue
+                                    <span class="btn-arrow">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Experience & Company -->
+                        <div class="form-step" data-step="2">
+                            <h2 class="step-title">Your experience & company</h2>
+
+                            <div class="form-group">
+                                <label for="years_experience">Years of Experience <span
+                                        class="required">*</span></label>
+                                <div class="slider-container">
+                                    <input type="range" id="years_experience" name="years_experience" min="0" max="40"
+                                        value="5" class="slider">
+                                    <div class="slider-value">
+                                        <span id="experience-display">5</span> years
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Company Size <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    {% for size in company_sizes %}
+                                    <label class="radio-option">
+                                        <input type="radio" name="company_size" value="{{ size.value }}"
+                                               {% if size.value == 'medium' %} checked{% endif %}>
+                                        <span class="radio-label">{{ size.label }}</span>
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="skills">Key Skills <span class="required">*</span></label>
+                                <input type="text" id="skills" name="skills"
+                                    placeholder="e.g., Python, React, Machine Learning, Leadership" required>
+                                <span class="field-hint">Separate skills with commas</span>
+                                <div class="skill-suggestions hidden" id="skill-suggestions">
+                                    <span class="skill-suggestions-label">💡 Common skills for your role:</span>
+                                    <div class="skill-chips" id="skill-chips"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary btn-back" data-back="1">
+                                    <span class="btn-arrow">←</span>
+                                    Back
+                                </button>
+                                <button type="button" class="btn btn-primary btn-next" data-next="3">
+                                    Continue
+                                    <span class="btn-arrow">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Salary & Optional -->
+                        <div class="form-step" data-step="3">
+                            <h2 class="step-title">Salary details <span class="optional-badge">optional but
+                                    recommended</span></h2>
+
+                            <div class="form-group">
+                                <label for="salary">Current Annual Salary</label>
+                                <div class="input-with-prefix">
+                                    <span class="input-prefix" id="currency-symbol">$</span>
+                                    <input type="number" id="salary" name="salary" placeholder="e.g., 75000" min="0"
+                                        step="1000">
+                                </div>
+                                <span class="field-hint">Providing your salary increases accuracy significantly</span>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="bonus_equity">Bonus / Equity</label>
+                                    <div class="input-with-prefix">
+                                        <span class="input-prefix bonus-prefix">$</span>
+                                        <input type="number" id="bonus_equity" name="bonus_equity"
+                                            placeholder="Annual value" min="0">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="years_in_role">Years in Current Role</label>
+                                    <input type="number" id="years_in_role" name="years_in_role" placeholder="e.g., 2"
+                                        min="0" max="40">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Received a Promotion Recently?</label>
+                                <div class="toggle-group">
+                                    <label class="toggle-option">
+                                        <input type="radio" name="promotion_received" value="true">
+                                        <span class="toggle-label">Yes</span>
+                                    </label>
+                                    <label class="toggle-option">
+                                        <input type="radio" name="promotion_received" value="false" checked>
+                                        <span class="toggle-label">No</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary btn-back" data-back="2">
+                                    <span class="btn-arrow">←</span>
+                                    Back
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-submit">
+                                    Check My Pay Fairness
+                                    <span class="btn-arrow">→</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Results Section (Hidden Initially) -->
+            <section class="results-section hidden" id="results">
+                <div class="results-container">
+                    <!-- Score Card -->
+                    <div class="score-card">
+                        <div class="score-circle">
+                            <svg class="score-ring" viewBox="0 0 120 120">
+                                <circle class="score-ring-bg" cx="60" cy="60" r="54" />
+                                <circle class="score-ring-progress" cx="60" cy="60" r="54" />
+                            </svg>
+                            <div class="score-value">
+                                <span class="score-number" id="result-score">0</span>
+                                <span class="score-label">Score</span>
+                            </div>
+                        </div>
+                        <div class="verdict-container">
+                            <h2 class="verdict" id="result-verdict">Calculating...</h2>
+                            <p class="confidence" id="result-confidence">Confidence: --</p>
+                        </div>
+                    </div>
+
+                    <!-- Salary Range -->
+                    <div class="salary-range-card">
+                        <h3>Salary Comparison: Fair Pay Range for Your Profile</h3>
+                        <div class="salary-range">
+                            <span class="salary-min" id="result-salary-min">--</span>
+                            <span class="salary-separator">to</span>
+                            <span class="salary-max" id="result-salary-max">--</span>
+                        </div>
+                        <p class="salary-note">Based on market data for similar roles in your location</p>
+                    </div>
+
+                    <!-- Reasons -->
+                    <div class="reasons-card">
+                        <h3>Why This Score?</h3>
+                        <ul class="reasons-list" id="result-reasons">
+                            <li>Loading...</li>
+                        </ul>
+                    </div>
+
+                    <!-- Data Freshness & Re-check Prompt -->
+                    <div class="data-info">
+                        <p class="data-updated" id="result-data-updated">Market data last updated: --</p>
+                        <p class="recheck-prompt">Re-check after a promotion, job change, or location change.</p>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div class="disclaimer-card">
+                        <p id="result-disclaimer"></p>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="result-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-start-over">
+                            Start New Assessment
+                        </button>
+                    </div>
+
+                    <!-- Anonymous Contribution (Placeholder) -->
+                    <div class="contribution-prompt hidden">
+                        <p>Want to anonymously help improve accuracy?</p>
+                        <button type="button" class="btn btn-text" disabled>Coming Soon</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Future Feature Placeholder -->
+            <section class="future-feature" id="jobs-placeholder">
+                <div class="coming-soon-card">
+                    <span class="coming-soon-badge">Coming Soon</span>
+                    <h3>Recommended Better-Paying Jobs for You</h3>
+                    <p>Based on your skills, experience, and location, we'll show relevant opportunities that match your
+                        profile and pay fairly.</p>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section" id="faq">
+                <h2>Frequently Asked Questions About Pay Fairness</h2>
+
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>How do I know if I am underpaid?</summary>
+                        <p>Signs you may be underpaid include: earning below market rates for your role and experience,
+                            not receiving raises in 2+ years, new hires earning more than you, and your skills being in
+                            high demand. FairPayCheck analyzes these factors to give you a clear assessment of your
+                            salary fairness.</p>
+                    </details>
+
+                    <details class="faq-item">
+                      <summary>Is FairPayCheck a salary comparison tool?</summary>
+                      <p>
+                        Yes. FairPayCheck compares your salary with market data for similar roles, experience levels, and locations.
+                        Unlike simple salary comparison websites, it also considers skills, company size, and career progression.
+                      </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>What are the signs of being underpaid?</summary>
+                        <p>Common signs include: salary below industry averages, long tenure without promotions,
+                            high-demand skills not reflected in pay, smaller company size, and being in the same role
+                            longer than 3 years without a raise. Our tool evaluates all these factors to determine if
+                            you're paid less than market rates.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Is FairPayCheck accurate?</summary>
+                        <p>FairPayCheck uses market data and industry patterns to provide estimates. While no tool can
+                            guarantee 100% accuracy due to individual circumstances, our scoring considers multiple
+                            factors including role, experience, skills, company size, and location. We clearly display
+                            confidence levels so you know how reliable each assessment is.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Does this tool work for different countries?</summary>
+                        <p>Yes! FairPayCheck currently supports USA, UK, Germany, Canada, Australia, and India. We
+                            normalize salary data using country-specific market indices and exchange rates, allowing for
+                            accurate cross-border comparisons. Whether you're asking "am I underpaid in the US" or "am I
+                            underpaid in India," we've got you covered.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Is FairPayCheck free to use?</summary>
+                        <p>Yes, FairPayCheck is completely free and does not require registration. Your data is
+                            processed anonymously and is not stored after your session ends. We believe everyone
+                            deserves to know if they're being paid fairly, regardless of their ability to pay for salary
+                            tools.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Can I trust salary tools online?</summary>
+                        <p>Quality salary tools like FairPayCheck use verified market data and transparent
+                            methodologies. We clearly show our confidence levels and explain how scores are calculated.
+                            For major career decisions, we recommend using multiple sources and considering your unique
+                            circumstances beyond just the numbers.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Why do loyal employees earn less?</summary>
+                        <p>Research shows that employees who stay at one company often earn 10-15% less than job
+                            hoppers. This happens because internal raises typically don't keep pace with market rate
+                            increases offered to new hires. Regular market checks help you stay informed and negotiate
+                            effectively for fair pay.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Should I switch jobs if I'm underpaid?</summary>
+                        <p>Not necessarily. First, try negotiating with your current employer using market data as
+                            evidence. If internal options are exhausted and the pay gap is significant (20%+), exploring
+                            external opportunities may be worthwhile. Consider factors beyond salary like benefits,
+                            culture, work-life balance, and growth potential.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>How often should I check my pay fairness?</summary>
+                        <p>We recommend checking your salary fairness annually, after promotions, when changing roles,
+                            or when moving to a new location. Market rates shift frequently, especially in high-demand
+                            fields like technology and data. Regular checks help you negotiate effectively during
+                            performance reviews.</p>
+                    </details>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="about-section" id="about">
+                <h2>About FairPayCheck</h2>
+                <div class="about-content">
+                    <p>
+                        FairPayCheck is a free salary fairness assessment tool designed to help workers understand
+                        if they're being paid fairly for their role, experience, and skills. We believe everyone
+                        deserves transparency when it comes to compensation.
+                    </p>
+                    <p>
+                        Our tool uses market data, industry patterns, and regional cost indices to provide
+                        meaningful insights. Unlike simple salary calculators, FairPayCheck considers multiple
+                        factors including your experience level, skill demand, company size, and career
+                        progression to give you a comprehensive pay fairness score.
+                    </p>
+                    <p>
+                        We're committed to user privacy. Your data is processed anonymously, never stored on
+                        our servers, and is not shared with any third parties. FairPayCheck is designed to
+                        empower you with information, not to collect your personal details.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Disclaimer Section -->
+            <section class="disclaimer-section" id="disclaimer">
+                <h2>Disclaimer</h2>
+                <p>
+                    FairPayCheck provides salary fairness assessments for educational and informational purposes only.
+                    This tool is not a substitute for professional career, financial, or legal advice. The results
+                    are based on estimated market data and general industry patterns, which may not reflect your
+                    specific circumstances, company policies, or local market conditions.
+                </p>
+                <p>
+                    Individual compensation depends on many factors including negotiation, company budget, benefits
+                    packages, and economic conditions that are beyond the scope of this tool. We recommend consulting
+                    with HR professionals, career coaches, or financial advisors for personalized guidance.
+                </p>
+                <p>
+                    By using FairPayCheck, you acknowledge that the results are estimates and should be used as one
+                    of many data points in your career decision-making process.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">FairPayCheck</span>
+                    <p>Know your worth. Anonymously.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#faq">FAQ</a>
+                    <a href="#about">About</a>
+                    <a href="#disclaimer">Disclaimer</a>
+                    <a href="mailto:feedback@fairpaycheck.com">Contact</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2025 FairPayCheck. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loading">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p id="loading-text">Analyzing market data...</p>
+            <div class="loading-progress">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data for JavaScript -->
+    <script>
+        window.COUNTRY_CURRENCIES = {{ country_currencies | safe }};
+        window.ROLE_SKILL_SUGGESTIONS = {{ role_skill_suggestions | safe }};
+        window.ROLE_KEYWORDS = {{ role_keywords | safe }};
+    </script>
+
+    <!-- Main Script -->
+    <script src="{% static 'js/app.js' %}" defer></script>
+</body>
+
+</html>
