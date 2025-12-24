@@ -1,0 +1,13 @@
+# robots.txt for FairPayCheck
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://fairpaycheck.com/sitemap.xml
+
+# Block admin pages
+Disallow: /admin/
+
+# Block API endpoints from indexing
+Disallow: /api/
