@@ -7,7 +7,7 @@ class VisitorLogAdmin(admin.ModelAdmin):
     """Admin configuration for VisitorLog model"""
     
     list_display = [
-        'ip_address', 'country', 'city', 'device_type', 
+        'ip_address', 'referrer', 'landing_page', 'country', 'city', 'device_type',
         'browser', 'is_bot', 'total_visits', 'total_page_views', 
         'first_visit', 'last_visit'
     ]
