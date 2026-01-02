@@ -15,10 +15,8 @@
     <title>FairPayCheck – Am I Underpaid? Free Salary Reality Check Tool</title>
     <meta name="description"
         content="Am I underpaid? Use FairPayCheck for a free salary comparison and pay fairness check. Compare your salary against market rates by role, experience, and location.">
-    <meta name="keywords"
-        content="am I underpaid, am I being underpaid, underpaid at work, am I paid fairly, underpaid check, underpaid test, salary fairness check, salary comparison, pay fairness, paid less than market, how do I know if I am underpaid, signs you are underpaid">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="FairPayCheck">
+    <meta name="author" content="Faisal Ahmad">
     <link rel="canonical" href="https://fairpaycheck.com/">
 
     <!-- Open Graph / Social Media -->
@@ -49,9 +47,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     </noscript>
 
-    <link rel="icon" href="/static/images/favicon-32.png" sizes="32x32">
-    <link rel="icon" href="/static/images/favicon-192.png" sizes="192x192">
-    <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+
 
     <!-- Critical CSS inline for first paint -->
     <style>
@@ -68,13 +64,54 @@
         .main {
             min-height: 100vh;
         }
+
+        /* Ownership attribution block */
+        .ownership-block {
+            text-align: center;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem auto;
+            max-width: 600px;
+            background: var(--surface-secondary, #f8f9fa);
+            border-radius: 8px;
+            border-top: 1px solid var(--border-color, #e9ecef);
+        }
+
+        .ownership-block p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--text-secondary, #6c757d);
+            line-height: 1.5;
+        }
+
+        .ownership-block a {
+            color: var(--primary-color, #0066cc);
+            text-decoration: none;
+        }
+
+        .ownership-block a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tool disclaimer */
+        .tool-disclaimer {
+            text-align: center;
+            font-size: 0.8125rem;
+            color: var(--text-secondary, #6c757d);
+            margin: 0.5rem 0 1rem;
+        }
+
+        /* Dark mode adjustments */
+        [data-theme="dark"] .ownership-block {
+            background: var(--surface-secondary, #1e1e1e);
+            border-color: var(--border-color, #333);
+        }
     </style>
 
     <!-- Main Styles - loaded with high priority -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
 
-        <!-- Favicons -->
+    <!-- Favicons -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
@@ -173,12 +210,18 @@
       "name": "FairPayCheck",
       "description": "Free online salary fairness and underpayment check tool. Compare your pay against market rates by role, experience, skills, and location to see if you are underpaid.",
       "url": "https://fairpaycheck.com/",
-      "applicationCategory": "BusinessApplication",
+      "applicationCategory": "FinanceApplication",
       "operatingSystem": "Web Browser",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Faisal Ahmad",
+        "jobTitle": "Software Engineer",
+        "sameAs": "https://www.linkedin.com/in/faisal-ahmad-44b37018a/"
       }
     }
     </script>
@@ -199,6 +242,19 @@
       }
     }
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FairPayCheck",
+      "url": "https://fairpaycheck.com/",
+      "logo": "https://fairpaycheck.com/static/images/android-chrome-512x512.png",
+      "founder": {
+        "@type": "Person",
+        "name": "Faisal Ahmad"
+      }
+    }
+    </script>
 </head>
 
 <body>
@@ -208,7 +264,8 @@
             <div class="header-content">
                 <a href="/" class="logo">
                     <span class="logo-span">
-                        <img alt="Fair Pay Check Logo" class="logo" width="32" height="32" src="{% static 'images/logo.png' %}" />
+                        <img alt="FairPayCheck salary fairness tool logo" class="logo" width="32" height="32"
+                            src="{% static 'images/logo.png' %}" />
                     </span>
                     <span class="logo-text">FairPayCheck</span>
                 </a>
@@ -239,6 +296,15 @@
                     <span class="trust-item">🔒 100% Anonymous</span>
                     <span class="trust-item">⚡ 60-Second Assessment</span>
                     <span class="trust-item">🌍 6 Countries Supported</span>
+                </p>
+            </section>
+
+            <!-- Human Ownership Block -->
+            <section class="ownership-block">
+                <p>
+                    Built and maintained by <a href="https://www.linkedin.com/in/faisal-ahmad-44b37018a/"
+                        target="_blank" rel="author noopener">Faisal Ahmad</a>, an independent software engineer.
+                    This tool is designed to provide educational insights into salary fairness using publicly available market data patterns.
                 </p>
             </section>
 
@@ -277,6 +343,9 @@
             </section>
 
             <!-- Form Section -->
+            <!-- Short Disclaimer -->
+            <p class="tool-disclaimer">For educational and informational purposes only.</p>
+
             <section class="form-section" id="assessment">
                 <div class="form-container">
                     <!-- Progress Indicator -->
@@ -549,11 +618,13 @@
                     </details>
 
                     <details class="faq-item">
-                      <summary>Is FairPayCheck a salary comparison tool?</summary>
-                      <p>
-                        Yes. FairPayCheck compares your salary with market data for similar roles, experience levels, and locations.
-                        Unlike simple salary comparison websites, it also considers skills, company size, and career progression.
-                      </p>
+                        <summary>Is FairPayCheck a salary comparison tool?</summary>
+                        <p>
+                            Yes. FairPayCheck compares your salary with market data for similar roles, experience
+                            levels, and locations.
+                            Unlike simple salary comparison websites, it also considers skills, company size, and career
+                            progression.
+                        </p>
                     </details>
 
                     <details class="faq-item">
@@ -627,20 +698,21 @@
                 <h2>About FairPayCheck</h2>
                 <div class="about-content">
                     <p>
-                        FairPayCheck is a free salary fairness assessment tool designed to help workers understand
-                        if they're being paid fairly for their role, experience, and skills. We believe everyone
-                        deserves transparency when it comes to compensation.
+                        FairPayCheck was created by <a href="https://www.linkedin.com/in/faisal-ahmad-44b37018a/"
+                            target="_blank" rel="noopener">Faisal Ahmad</a>, a software engineer
+                        with experience building data-driven developer tools. The motivation came from observing
+                        how pay inequality and lack of salary transparency affect workers across industries.
                     </p>
                     <p>
-                        Our tool uses market data, industry patterns, and regional cost indices to provide
-                        meaningful insights. Unlike simple salary calculators, FairPayCheck considers multiple
-                        factors including your experience level, skill demand, company size, and career
-                        progression to give you a comprehensive pay fairness score.
+                        This free tool uses market data patterns, industry benchmarks, and regional cost indices
+                        to provide salary insights. It considers multiple factors including experience level,
+                        skill demand, company size, and career progression. Results are estimates intended to
+                        serve as one data point in your career decision-making process.
                     </p>
                     <p>
-                        We're committed to user privacy. Your data is processed anonymously, never stored on
-                        our servers, and is not shared with any third parties. FairPayCheck is designed to
-                        empower you with information, not to collect your personal details.
+                        Your privacy matters. Data is processed anonymously, never stored on servers, and is
+                        not shared with third parties. FairPayCheck is designed to inform, not to collect
+                        personal details.
                     </p>
                 </div>
             </section>
@@ -682,6 +754,7 @@
                     <a href="mailto:feedback@fairpaycheck.com">Contact</a>
                 </div>
                 <div class="footer-copyright">
+                    <p>Built by an independent software engineer focused on transparency and privacy.</p>
                     <p>&copy; 2025 FairPayCheck. All rights reserved.</p>
                 </div>
             </div>
