@@ -20,8 +20,16 @@ urlpatterns = [
     path('', views.index_view, name='index'),
     path('api/calculate/', views.calculate_score_api, name='calculate_score'),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots'),
-    path('sitemap.xml', TemplateView.as_view(template_name='sitemap.xml', content_type='application/xml'), name='sitemap'),
+    path('sitemap.xml', views.sitemap_view, name='sitemap'),
     path('favicon.ico', favicon_view, name='favicon'),
+    
+    # Blog URLs
+    path('blog/', views.blog_list_view, name='blog_list'),
+    path('blog/<slug:slug>/', views.blog_detail_view, name='blog_detail'),
+    
+    # Author URLs
+    path('author/<slug:slug>/', views.author_detail_view, name='author_detail'),
 ]
+
 
 

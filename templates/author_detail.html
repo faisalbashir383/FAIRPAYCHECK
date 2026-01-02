@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta -->
+    <title>{{ author.name }} – Author at FairPayCheck</title>
+    <meta name="description" content="{{ author.bio|truncatewords:25 }}">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="{{ author.name }}">
+    <link rel="canonical" href="https://fairpaycheck.com{{ author.get_absolute_url }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="{{ author.name }} – Author at FairPayCheck">
+    <meta property="og:description" content="{{ author.bio|truncatewords:25 }}">
+    <meta property="og:url" content="https://fairpaycheck.com{{ author.get_absolute_url }}">
+    <meta property="og:site_name" content="FairPayCheck">
+    {% if author.profile_image %}
+    <meta property="og:image" content="{{ author.profile_image }}">
+    {% endif %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ author.name }} – Author at FairPayCheck">
+    <meta name="twitter:description" content="{{ author.bio|truncatewords:25 }}">
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+
+    <!-- Favicons -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+
+    <!-- Person Schema (E-E-A-T) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "{{ author.name }}",
+      "jobTitle": "Software Engineer",
+      "url": "https://fairpaycheck.com{{ author.get_absolute_url }}",
+      "sameAs": [
+        "{{ author.linkedin_url }}"{% if author.github_url %},
+        "{{ author.github_url }}"{% endif %}
+      ]{% if author.profile_image %},
+      "image": "{{ author.profile_image }}"{% endif %}
+    }
+    </script>
+
+    <style>
+        .author-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0 4rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color, #0066cc);
+            text-decoration: none;
+            font-size: 0.9375rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .author-header {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .author-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .author-image-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--surface-secondary, #f0f0f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-tertiary, #999);
+            flex-shrink: 0;
+        }
+
+        .author-info h1 {
+            font-size: 2rem;
+            margin: 0 0 0.5rem;
+            color: var(--text-primary, #1a1a1a);
+        }
+
+        .author-title {
+            font-size: 1rem;
+            color: var(--text-secondary, #6c757d);
+            margin: 0 0 1rem;
+        }
+
+        .author-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .author-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--surface-secondary, #f8f9fa);
+            border-radius: 6px;
+            color: var(--text-primary, #1a1a1a);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .author-links a:hover {
+            background: var(--primary-color, #0066cc);
+            color: #fff;
+        }
+
+        .author-bio {
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            color: var(--text-primary, #1a1a1a);
+            margin-bottom: 2rem;
+        }
+
+        .expertise-section h2 {
+            font-size: 1.25rem;
+            margin: 0 0 1rem;
+            color: var(--text-primary, #1a1a1a);
+        }
+
+        .expertise-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .expertise-list li {
+            background: var(--surface-secondary, #f8f9fa);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--text-secondary, #555);
+        }
+
+        .posts-section h2 {
+            font-size: 1.25rem;
+            margin: 0 0 1rem;
+            color: var(--text-primary, #1a1a1a);
+        }
+
+        .posts-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .posts-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color, #e9ecef);
+        }
+
+        .posts-list li:last-child {
+            border-bottom: none;
+        }
+
+        .posts-list a {
+            color: var(--primary-color, #0066cc);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .posts-list a:hover {
+            text-decoration: underline;
+        }
+
+        .posts-list .post-date {
+            display: block;
+            font-size: 0.8125rem;
+            color: var(--text-tertiary, #999);
+            margin-top: 0.25rem;
+        }
+
+        .no-posts {
+            color: var(--text-secondary, #6c757d);
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .author-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .author-links {
+                justify-content: center;
+            }
+        }
+
+        [data-theme="dark"] .author-info h1,
+        [data-theme="dark"] .author-bio,
+        [data-theme="dark"] .expertise-section h2,
+        [data-theme="dark"] .posts-section h2 {
+            color: var(--text-primary, #e0e0e0);
+        }
+
+        [data-theme="dark"] .author-links a,
+        [data-theme="dark"] .expertise-list li {
+            background: var(--surface-secondary, #2a2a2a);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <span class="logo-span">
+                        <img alt="FairPayCheck salary fairness tool logo" class="logo" width="32" height="32"
+                            src="{% static 'images/logo.png' %}" />
+                    </span>
+                    <span class="logo-text">FairPayCheck</span>
+                </a>
+                <div class="header-right">
+                    <p class="tagline">Know your worth. Anonymously.</p>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode"
+                        title="Toggle dark/light mode">
+                        <span class="theme-icon light-icon">🌙</span>
+                        <span class="theme-icon dark-icon">☀️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="author-page">
+                <a href="/blog/" class="back-link">← Back to Blog</a>
+
+                <div class="author-header">
+                    {% if author.profile_image %}
+                    <img src="{{ author.profile_image }}" alt="{{ author.name }}" class="author-image">
+                    {% else %}
+                    <div class="author-image-placeholder">👤</div>
+                    {% endif %}
+
+                    <div class="author-info">
+                        <h1>{{ author.name }}</h1>
+                        <p class="author-title">Software Engineer & Author</p>
+                        <div class="author-links">
+                            <a href="{{ author.linkedin_url }}" target="_blank" rel="noopener">
+                                🔗 LinkedIn
+                            </a>
+                            {% if author.github_url %}
+                            <a href="{{ author.github_url }}" target="_blank" rel="noopener">
+                                💻 GitHub
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="author-bio">{{ author.bio|safe }}</div>
+
+                <section class="expertise-section">
+                    <h2>Areas of Expertise</h2>
+                    <ul class="expertise-list">
+                        {% for expertise in author.get_expertise_list %}
+                        <li>{{ expertise|safe }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+                <section class="posts-section">
+                    <h2>Latest Articles</h2>
+                    {% if posts %}
+                    <ul class="posts-list">
+                        {% for post in posts %}
+                        <li>
+                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            <span class="post-date">{{ post.published_at|date:"F j, Y" }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="no-posts">No articles published yet.</p>
+                    {% endif %}
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">FairPayCheck</span>
+                    <p>Know your worth. Anonymously.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/blog/">Blog</a>
+                    <a href="/#faq">FAQ</a>
+                    <a href="/#about">About</a>
+                    <a href="/#disclaimer">Disclaimer</a>
+                    <a href="mailto:feedback@fairpaycheck.com">Contact</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>Built by an independent software engineer focused on transparency and privacy.</p>
+                    <p>&copy; 2025 FairPayCheck. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme toggle script -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+    </script>
+</body>
+
+</html>

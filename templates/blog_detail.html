@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta -->
+    <title>{{ post.meta_title }}</title>
+    <meta name="description" content="{{ post.meta_description }}">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="{{ post.author_name }}">
+    <link rel="canonical" href="https://fairpaycheck.com{{ post.get_absolute_url }}">
+
+    <!-- Open Graph (Article) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ post.meta_title }}">
+    <meta property="og:description" content="{{ post.meta_description }}">
+    <meta property="og:url" content="https://fairpaycheck.com{{ post.get_absolute_url }}">
+    <meta property="og:site_name" content="FairPayCheck">
+    <meta property="og:image" content="{{ post.featured_image }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="{{ post.published_at|date:'c' }}">
+    <meta property="article:modified_time" content="{{ post.updated_at|date:'c' }}">
+    <meta property="article:author" content="{{ post.author_name }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ post.meta_title }}">
+    <meta name="twitter:description" content="{{ post.meta_description }}">
+    <meta name="twitter:image" content="{{ post.featured_image }}">
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+
+    <!-- Favicons -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+
+    <!-- NewsArticle Schema (Google Discover) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "{{ post.title }}",
+      "image": "{{ post.featured_image }}",
+      "author": {
+        "@type": "Person",
+        "name": "{% if post.author %}{{ post.author.name }}{% else %}Faisal Ahmad{% endif %}",
+        "url": "{% if post.author %}https://fairpaycheck.com{{ post.author.get_absolute_url }}{% endif %}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "FairPayCheck",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fairpaycheck.com/static/images/android-chrome-512x512.png"
+        }
+      },
+      "datePublished": "{{ post.published_at|date:'Y-m-d' }}",
+      "dateModified": "{{ post.updated_at|date:'Y-m-d' }}"
+    }
+    </script>
+
+    <style>
+        .article-header {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color, #0066cc);
+            text-decoration: none;
+            font-size: 0.9375rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .article-header h1 {
+            font-size: 2.25rem;
+            line-height: 1.3;
+            margin: 0 0 1rem;
+            color: var(--text-primary, #1a1a1a);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9375rem;
+            color: var(--text-secondary, #6c757d);
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta .author {
+            font-weight: 500;
+            color: var(--text-primary, #1a1a1a);
+        }
+
+        .featured-image {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            aspect-ratio: 1200 / 630;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 0 auto 2rem;
+            display: block;
+        }
+
+        .article-content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 0 3rem;
+        }
+
+        .article-intro {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--text-secondary, #555);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color, #e9ecef);
+        }
+
+        .article-body {
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            color: var(--text-primary, #1a1a1a);
+        }
+
+        .article-body h2 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--text-primary, #1a1a1a);
+        }
+
+        .article-body h3 {
+            font-size: 1.25rem;
+            margin: 2rem 0 0.75rem;
+            color: var(--text-primary, #1a1a1a);
+        }
+
+        .article-body p {
+            margin: 0 0 1.25rem;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 0 0 1.25rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-body a {
+            color: var(--primary-color, #0066cc);
+        }
+
+        .article-disclaimer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color, #e9ecef);
+            font-size: 0.875rem;
+            color: var(--text-tertiary, #999);
+            font-style: italic;
+        }
+
+        .article-cta {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--surface-secondary, #f8f9fa);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .article-cta p {
+            margin: 0 0 1rem;
+            font-size: 1rem;
+        }
+
+        .article-cta a {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color, #0066cc);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .article-cta a:hover {
+            opacity: 0.9;
+        }
+
+        [data-theme="dark"] .article-header h1,
+        [data-theme="dark"] .article-body,
+        [data-theme="dark"] .article-body h2,
+        [data-theme="dark"] .article-body h3 {
+            color: var(--text-primary, #e0e0e0);
+        }
+
+        [data-theme="dark"] .article-meta .author {
+            color: var(--text-primary, #e0e0e0);
+        }
+
+        [data-theme="dark"] .article-cta {
+            background: var(--surface-secondary, #2a2a2a);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <span class="logo-span">
+                        <img alt="FairPayCheck salary fairness tool logo" class="logo" width="32" height="32"
+                            src="{% static 'images/logo.png' %}" />
+                    </span>
+                    <span class="logo-text">FairPayCheck</span>
+                </a>
+                <div class="header-right">
+                    <p class="tagline">Know your worth. Anonymously.</p>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode"
+                        title="Toggle dark/light mode">
+                        <span class="theme-icon light-icon">🌙</span>
+                        <span class="theme-icon dark-icon">☀️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <article>
+                <header class="article-header">
+                    <a href="/blog/" class="back-link">← Back to Blog</a>
+                    <h1>{{ post.title }}</h1>
+                    <div class="article-meta">
+                        <span>By</span>
+                        {% if post.author %}
+                        <a href="{{ post.author.get_absolute_url }}" class="author">{{ post.author.name }}</a>
+                        {% else %}
+                        <span class="author">Faisal Ahmad</span>
+                        {% endif %}
+                        <span>·</span>
+                        <time datetime="{{ post.published_at|date:'Y-m-d' }}">{{ post.published_at|date:"F j, Y" }}</time>
+                    </div>
+                </header>
+
+                <!-- Featured Image (eager loading for Discover) -->
+                <img src="{{ post.featured_image }}" alt="{{ post.title }}" class="featured-image" width="1200"
+                    height="630" loading="eager">
+
+                <div class="article-content">
+                    <!-- Intro paragraph using excerpt -->
+                    <p class="article-intro">{{ post.excerpt }}</p>
+
+                    <!-- Main content (HTML) -->
+                    <div class="article-body">
+                        {{ post.content|safe }}
+                    </div>
+
+                    <!-- Soft CTA to tool -->
+                    <div class="article-cta">
+                        <p>Want to check if you're being paid fairly?</p>
+                        <a href="/">Try FairPayCheck →</a>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <p class="article-disclaimer">
+                        This article is for educational and informational purposes only.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">FairPayCheck</span>
+                    <p>Know your worth. Anonymously.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/#faq">FAQ</a>
+                    <a href="/#about">About</a>
+                    <a href="/#disclaimer">Disclaimer</a>
+                    <a href="mailto:feedback@fairpaycheck.com">Contact</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>Built by an independent software engineer focused on transparency and privacy.</p>
+                    <p>&copy; 2025 FairPayCheck. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme toggle script -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+    </script>
+</body>
+
+</html>

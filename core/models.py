@@ -97,3 +97,96 @@ class PageView(models.Model):
     
     def __str__(self):
         return f"{self.url} - {self.timestamp.strftime('%Y-%m-%d %H:%M')}"
+
+
+class Author(models.Model):
+    """
+    Author model for E-E-A-T compliance and Google Discover eligibility.
+    Each author has a public profile page with identity verification links.
+    """
+    
+    # Identity
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, max_length=100)
+    
+    # Bio and expertise
+    bio = models.TextField(help_text="Human-written bio describing real experience")
+    expertise = models.TextField(
+        help_text="Comma-separated expertise areas (e.g., 'Software Engineering, Data Analysis')"
+    )
+    
+    # External identity proof (E-E-A-T)
+    linkedin_url = models.URLField(help_text="LinkedIn profile URL (mandatory for E-E-A-T)")
+    github_url = models.URLField(blank=True, help_text="GitHub profile URL (recommended)")
+    
+    # Profile image (external URL)
+    profile_image = models.URLField(
+        blank=True,
+        help_text="Profile image URL (use GitHub raw URL, recommended 400x400)"
+    )
+    
+    class Meta:
+        verbose_name = 'Author'
+        verbose_name_plural = 'Authors'
+    
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return f"/author/{self.slug}/"
+    
+    def get_expertise_list(self):
+        """Return expertise as a list."""
+        return [e.strip() for e in self.expertise.split(',') if e.strip()]
+
+
+class BlogPost(models.Model):
+    """
+    Blog post model for Google Discover-eligible content.
+    Uses external URLs for images (GitHub raw URLs).
+    """
+    
+    # Content fields
+    title = models.CharField(max_length=300)
+    slug = models.SlugField(unique=True, max_length=200)
+    excerpt = models.TextField(help_text="Short summary for Discover & listings")
+    content = models.TextField(help_text="HTML content only, no Markdown")
+    
+    # Featured image (external URL - e.g., GitHub raw)
+    featured_image = models.URLField(
+        max_length=500,
+        help_text="Full URL to featured image (1200x630, use GitHub raw URL)"
+    )
+    
+    # Author (ForeignKey for E-E-A-T)
+    author = models.ForeignKey(
+        Author,
+        on_delete=models.CASCADE,
+        related_name='blog_posts',
+        null=True,
+        blank=True
+    )
+    
+    # Timestamps
+    published_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    # SEO fields
+    meta_title = models.CharField(max_length=300)
+    meta_description = models.CharField(max_length=160)
+    
+    # Publishing
+    is_published = models.BooleanField(default=True)
+    
+    class Meta:
+        verbose_name = 'Blog Post'
+        verbose_name_plural = 'Blog Posts'
+        ordering = ['-published_at']
+    
+    def __str__(self):
+        return self.title
+    
+    def get_absolute_url(self):
+        return f"/blog/{self.slug}/"
+
+

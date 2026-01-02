@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import VisitorLog, PageView
+from .models import VisitorLog, PageView, BlogPost, Author
 
 
 @admin.register(VisitorLog)
@@ -63,3 +63,58 @@ class PageViewAdmin(admin.ModelAdmin):
     ]
     date_hierarchy = 'timestamp'
     raw_id_fields = ['visitor']
+
+
+@admin.register(BlogPost)
+class BlogPostAdmin(admin.ModelAdmin):
+    """Admin configuration for BlogPost model"""
+    
+    list_display = ['title', 'slug', 'author', 'is_published', 'published_at', 'updated_at']
+    list_filter = ['is_published', 'published_at', 'author']
+    search_fields = ['title', 'slug', 'excerpt', 'content']
+    prepopulated_fields = {'slug': ('title',)}
+    date_hierarchy = 'published_at'
+    raw_id_fields = ['author']
+    
+    fieldsets = (
+        ('Content', {
+            'fields': ('title', 'slug', 'excerpt', 'content')
+        }),
+        ('Featured Image', {
+            'fields': ('featured_image',),
+            'description': 'Use GitHub raw URL for image (1200x630)'
+        }),
+        ('Author', {
+            'fields': ('author',)
+        }),
+        ('SEO', {
+            'fields': ('meta_title', 'meta_description')
+        }),
+        ('Publishing', {
+            'fields': ('is_published',)
+        }),
+    )
+
+
+@admin.register(Author)
+class AuthorAdmin(admin.ModelAdmin):
+    """Admin configuration for Author model"""
+    
+    list_display = ['name', 'slug', 'linkedin_url']
+    search_fields = ['name', 'slug', 'bio']
+    prepopulated_fields = {'slug': ('name',)}
+    
+    fieldsets = (
+        ('Identity', {
+            'fields': ('name', 'slug', 'profile_image')
+        }),
+        ('Bio & Expertise', {
+            'fields': ('bio', 'expertise'),
+            'description': 'Human-written bio and comma-separated expertise areas'
+        }),
+        ('External Links (E-E-A-T)', {
+            'fields': ('linkedin_url', 'github_url'),
+            'description': 'LinkedIn is mandatory for Google Discover eligibility'
+        }),
+    )
+

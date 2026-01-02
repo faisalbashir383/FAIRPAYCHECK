@@ -4,13 +4,14 @@ Handles page rendering and API endpoints.
 """
 
 import json
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 from . import data
 from . import scoring
+from .models import BlogPost, Author
 
 
 def index_view(request):
@@ -80,3 +81,48 @@ def calculate_score_api(request):
             'version': '1.0',
             'debug_error': str(e)  # Remove in production
         }, status=500)
+
+
+def blog_list_view(request):
+    """Render the blog listing page."""
+    posts = BlogPost.objects.filter(is_published=True).order_by('-published_at')
+    context = {
+        'posts': posts,
+    }
+    return render(request, 'blog_list.html', context)
+
+
+def blog_detail_view(request, slug):
+    """Render a single blog post with Article schema."""
+    post = get_object_or_404(BlogPost, slug=slug, is_published=True)
+    context = {
+        'post': post,
+    }
+    return render(request, 'blog_detail.html', context)
+
+
+def sitemap_view(request):
+    """Generate dynamic sitemap including blog posts."""
+    posts = BlogPost.objects.filter(is_published=True).order_by('-published_at')
+    authors = Author.objects.all()
+    context = {
+        'posts': posts,
+        'authors': authors,
+    }
+    return render(request, 'sitemap.xml', context, content_type='application/xml')
+
+
+def author_detail_view(request, slug):
+    """Render author profile page with Person schema for E-E-A-T."""
+    author = get_object_or_404(Author, slug=slug)
+    # Get latest 5 posts by this author
+    posts = BlogPost.objects.filter(
+        author=author, 
+        is_published=True
+    ).order_by('-published_at')[:5]
+    context = {
+        'author': author,
+        'posts': posts,
+    }
+    return render(request, 'author_detail.html', context)
+
