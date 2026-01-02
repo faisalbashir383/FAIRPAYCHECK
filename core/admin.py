@@ -15,7 +15,7 @@ class VisitorLogAdmin(admin.ModelAdmin):
         'is_bot', 'is_mobile', 'device_type', 'country', 
         'first_visit', 'last_visit'
     ]
-    search_fields = ['ip_address', 'country', 'city', 'browser', 'user_agent']
+    search_fields = ['ip_address', 'country', 'city', 'browser', 'user_agent', 'referrer', 'landing_page']
     readonly_fields = [
         'ip_address', 'session_key', 'user_agent', 'browser', 'browser_version',
         'device_type', 'os', 'os_version', 'is_bot', 'is_mobile',
